@@ -1,26 +1,22 @@
-#include <string.h>
-#include <sys/types.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
+#include "main.h"
 
-int main ()
+/**
+ * main - entry point
+ *
+ * Return: Always 0
+ */
+int main(void)
 {
 	char *line = NULL;
 	size_t len = 0;
 	int nread = 0;
 	extern char **environ;
-	char *argv[2];
+	char **argv;
 	pid_t fpid;
 
 	/*commands_t build_in[] = {
 		{"c", print_char},
 		{"s", print_string},
-		{"%", print_percent},
-		{"d", print_int},
-		{"i", print_int},
 		{NULL, NULL},
 	};*/
 
@@ -29,14 +25,21 @@ int main ()
 	if (isatty(STDIN_FILENO) == 1)
 		printf("prompt$ ");
 	nread = getline(&line, &len, stdin);
+	/*Don't forget to free getline*/
 	if (nread == -1)
 		break;
-	if (nread == 1 )
+	if (nread == 1)
 		continue;
 	if ((nread > 0) && (line[nread - 1] == '\n'))
 		line[nread - 1] = '\0';
-	argv[0] = line;/*à modifier*/
-	argv[1] = NULL;
+	
+	argv = split_string(line);
+	if (argv[0] == NULL)
+	{
+		free(argv);
+		continue;
+	}
+
 	fpid = fork();
 	if (fpid == -1)
 	{
@@ -44,8 +47,8 @@ int main ()
 		exit(EXIT_FAILURE); /*préciser*/
 	}
 	else if (fpid == 0) /*enfant*/
-	{	
-		if (execve(line, argv, environ) == - 1)
+	{
+		if (execve(argv[0], argv, environ) == -1)
 		{
 			perror("./prompt");
 			exit(EXIT_FAILURE); /*préciser*/
@@ -54,5 +57,6 @@ int main ()
 	else
 		waitpid(fpid, NULL, 0);
 	}
+
 	return (0);
 }
