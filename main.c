@@ -11,7 +11,7 @@ int main(void)
 	size_t len = 0;
 	int nread = 0;
 	extern char **environ;
-	char **argv;
+	char **argv, **path;
 	pid_t fpid;
 
 
@@ -20,7 +20,7 @@ int main(void)
 		{"s", print_string},
 		{NULL, NULL},
 	};*/
-	get_paths(environ);
+	path = get_paths(environ);
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
@@ -33,13 +33,16 @@ int main(void)
 			continue;
 		if ((nread > 0) && (line[nread - 1] == '\n'))
 			line[nread - 1] = '\0';
-	
+
 		argv = split_string(line, " ");
 		if (argv[0] == NULL)
 		{
 			free(argv);
 			continue;
 		}
+
+		if (argv[0][0] != '/')
+			argv[0] = check_path(path, argv[0]);
 
 		fpid = fork();
 		if (fpid == -1)
