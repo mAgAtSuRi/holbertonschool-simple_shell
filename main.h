@@ -14,5 +14,5 @@ typedef struct commands
 	/* type ? (*f)(args ?)*/
 } commands_t;
 
-char **split_string(char *);
+char **split_string(char *str, const char *sep);
 #endif

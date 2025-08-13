@@ -33,7 +33,7 @@ int main(void)
 	if ((nread > 0) && (line[nread - 1] == '\n'))
 		line[nread - 1] = '\0';
 	
-	argv = split_string(line);
+	argv = split_string(line, " ");
 	if (argv[0] == NULL)
 	{
 		free(argv);
