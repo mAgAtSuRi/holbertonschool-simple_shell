@@ -15,4 +15,5 @@ typedef struct commands
 } commands_t;
 
 char **split_string(char *str, const char *sep);
+char **get_paths(char **environ);
 #endif
