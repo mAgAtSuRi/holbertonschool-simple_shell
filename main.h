@@ -7,6 +7,8 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <dirent.h>
+#include <linux/limits.h>
 
 typedef struct commands
 {
@@ -14,5 +16,8 @@ typedef struct commands
 	/* type ? (*f)(args ?)*/
 } commands_t;
 
-char **split_string(char *);
+char **split_string(char *str, const char *sep);
+char **get_paths(char **environ);
+char *check_path(char **path, char *exec_name);
+
 #endif
