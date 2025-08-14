@@ -7,19 +7,13 @@
  */
 int main(void)
 {
-	char *line = NULL;
+	char *line = NULL, *temp_cmd;
 	size_t len = 0;
 	int nread = 0;
 	extern char **environ;
 	char **argv, **path;
 	pid_t fpid;
 
-
-	/*commands_t build_in[] = {
-		{"c", print_char},
-		{"s", print_string},
-		{NULL, NULL},
-	};*/
 	path = get_paths(environ);
 	while (1)
 	{
@@ -42,7 +36,19 @@ int main(void)
 		}
 
 		if (argv[0][0] != '/')
-			argv[0] = check_path(path, argv[0]);
+		{
+			if (check_builtin(argv[0], argv) == 1)
+				continue;
+
+			temp_cmd = check_path(path, argv[0]);
+			if (temp_cmd == NULL)
+			{
+				fprintf(stderr, "%s: command not found\n", argv[0]);
+				free(argv);
+				continue;
+			}
+		}
+		argv[0] = temp_cmd;
 
 		fpid = fork();
 		if (fpid == -1)

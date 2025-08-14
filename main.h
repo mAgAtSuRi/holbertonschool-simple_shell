@@ -10,14 +10,17 @@
 #include <dirent.h>
 #include <linux/limits.h>
 
-typedef struct commands
+typedef struct built_in
 {
 	char *cmd;
-	/* type ? (*f)(args ?)*/
-} commands_t;
+	void (*f)(char **);
+} builtin_t;
 
 char **split_string(char *str, const char *sep);
 char **get_paths(char **environ);
 char *check_path(char **path, char *exec_name);
+int check_builtin(char *command, char **argv);
+int _atoi(char *str);
+void frexit(char **argv);
 
 #endif
