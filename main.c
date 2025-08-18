@@ -23,10 +23,10 @@ int main(void)
 		/*Don't forget to free getline*/
 		if (nread == -1)
 			break;
-		if (nread == 1)
+		if (nread == 1)/*cas où c'est un espace ; ignorer ?*/
 			continue;
 		if ((nread > 0) && (line[nread - 1] == '\n'))
-			line[nread - 1] = '\0';
+			line[nread - 1] = '\0'; /*raison pour laquelle ça foire avec echo ?*/
 
 		argv = split_string(line, " ");
 		if (argv[0] == NULL)
@@ -48,7 +48,9 @@ int main(void)
 				continue;
 			}
 		}
-		argv[0] = temp_cmd;
+		argv[0] = temp_cmd;/*attention, hors if !
+							temp_cmd non alloué si la cmd
+							commence par un / */
 
 		fpid = fork();
 		if (fpid == -1)
