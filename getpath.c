@@ -18,8 +18,7 @@ char **get_paths(char **environ)
 
 	while (environ[i] != NULL)
 	{
-		if (environ[i][0] == 'P' && environ[i][1] == 'A' && environ[i][2] == 'T'
-		&& environ[i][3] == 'H')
+		if (strncmp(environ[i], "PATH=", 5) == 0)
 			temp_path = environ[i];
 		i++;
 	}
