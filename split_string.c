@@ -37,7 +37,7 @@ char **split_string(char *str, const char *sep)
 	token = strtok(str, sep);
 	while (token != NULL)
 	{
-		arg[j] = token;
+		arg[j] = strdup(token);
 		j++;
 		token = strtok(NULL, sep);
 	}
