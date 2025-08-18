@@ -6,8 +6,8 @@
 void _printenv(char **argv)
 {
 	extern char **environ;
-	(void)argv;
 	int i = 0;
+	(void)argv;
 
 	if (environ == NULL)
 		exit(EXIT_FAILURE);
