@@ -9,6 +9,9 @@ void free_array(char **array)
 {
 	int i = 0;
 
+	if (array == NULL)
+		return;
+
 	while (array[i])
 	{
 		free(array[i]);

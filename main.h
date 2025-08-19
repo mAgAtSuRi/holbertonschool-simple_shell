@@ -9,7 +9,13 @@
 #include <string.h>
 #include <dirent.h>
 #include <linux/limits.h>
-
+/**
+ * struct built_in - Structure of a shell command
+ * @cmd: builtin command
+ * @f: pointer to function associated with the command
+ *
+ * Description: Associate builtin command with its function
+ */
 typedef struct built_in
 {
 	char *cmd;
@@ -23,5 +29,6 @@ int check_builtin(char *command, char **argv);
 int _atoi(char *str);
 void frexit(char **argv);
 void free_array(char **array);
+void clean_all (char *, char **, char **);
 
 #endif
