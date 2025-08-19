@@ -13,6 +13,7 @@ int main(void)
 	extern char **environ;
 	char **argv, **path;
 	pid_t fpid;
+	int status;
 
 	path = get_paths(environ);
 	while (1)
@@ -46,9 +47,9 @@ int main(void)
 			temp_cmd = check_path(path, argv[0]);
 			if (temp_cmd == NULL)
 			{
-				fprintf(stderr, "%s: command not found\n", argv[0]);
-				free_array(argv);
-				continue;
+                fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+                free_array(argv);
+                continue;
 			}
 			free(argv[0]);
 			argv[0] = temp_cmd;
@@ -67,15 +68,17 @@ int main(void)
 		{
 			if (execve(argv[0], argv, environ) == -1)
 			{
-				fprintf(stderr, "%s: command not found\n", argv[0]);
+				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
 				exit(127);
 			}
 		}
 		else
 		{
-			waitpid(fpid, NULL, 0);
-			free_array(argv);
-		}
+            waitpid(fpid, &status, 0);
+            if (WIFEXITED(status))
+                status = WEXITSTATUS(status);
+            free_array(argv);
+        }
 	}
 	free(line);
 	free_array(path);
