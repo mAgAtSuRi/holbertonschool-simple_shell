@@ -30,19 +30,27 @@ int main(void)
 
 		argv = split_string(line, " ");
 		if (argv[0] == NULL)
+		{
+			free_array(argv);
 			continue;
+		}
 
 		if (argv[0][0] != '/')
 		{
 			if (check_builtin(argv[0], argv) == 1)
+			{
+				free_array(argv);
 				continue;
+			}
 
 			temp_cmd = check_path(path, argv[0]);
 			if (temp_cmd == NULL)
 			{
 				fprintf(stderr, "%s: command not found\n", argv[0]);
+				free_array(argv);
 				continue;
 			}
+			free(argv[0]);
 			argv[0] = temp_cmd;
 		}
 
@@ -51,6 +59,7 @@ int main(void)
 		{
 			perror("fpid");
 			free(line);
+			free_array(argv);
 			free_array(path);
 			exit(EXIT_FAILURE);
 		}
@@ -60,12 +69,16 @@ int main(void)
 			{
 				perror("./prompt");
 				free(line);
+				free_array(argv);
 				free_array(path);
 				exit(EXIT_FAILURE);
 			}
 		}
 		else
+		{
 			waitpid(fpid, NULL, 0);
+			free_array(argv);
+		}
 	}
 	free(line);
 	free_array(path);
