@@ -36,7 +36,7 @@ int main(void)
 			continue;
 		}
 
-		if (argv[0][0] != '/')
+		if (access(argv[0], X_OK) != 0)
 		{
 			if (check_builtin(argv[0], argv) == 1)
 			{
