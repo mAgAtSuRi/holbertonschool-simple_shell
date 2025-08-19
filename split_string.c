@@ -3,7 +3,7 @@
 /**
  * split_string - create an array filled with pointers to each word
  * @str: string to split
- *
+ * @sep: separator to split the string
  * Return: An array like argv
  */
 char **split_string(char *str, const char *sep)

@@ -19,8 +19,8 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO) == 1)
 			printf("prompt$ ");
+
 		nread = getline(&line, &len, stdin);
-		/*Don't forget to free getline*/
 		if (nread == -1)
 			break;
 		if (nread == 1)
@@ -30,10 +30,7 @@ int main(void)
 
 		argv = split_string(line, " ");
 		if (argv[0] == NULL)
-		{
-			free(argv);
 			continue;
-		}
 
 		if (argv[0][0] != '/')
 		{
@@ -44,29 +41,33 @@ int main(void)
 			if (temp_cmd == NULL)
 			{
 				fprintf(stderr, "%s: command not found\n", argv[0]);
-				free(argv);
 				continue;
 			}
+			argv[0] = temp_cmd;
 		}
-		argv[0] = temp_cmd;
 
 		fpid = fork();
 		if (fpid == -1)
 		{
 			perror("fpid");
-			exit(EXIT_FAILURE); /*préciser*/
+			free(line);
+			free_array(path);
+			exit(EXIT_FAILURE);
 		}
-		else if (fpid == 0) /*enfant*/
+		else if (fpid == 0)
 		{
 			if (execve(argv[0], argv, environ) == -1)
 			{
 				perror("./prompt");
-				exit(EXIT_FAILURE); /*préciser*/
+				free(line);
+				free_array(path);
+				exit(EXIT_FAILURE);
 			}
 		}
 		else
 			waitpid(fpid, NULL, 0);
 	}
-
+	free(line);
+	free_array(path);
 	return (0);
 }
