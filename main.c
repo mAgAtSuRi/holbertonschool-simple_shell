@@ -67,11 +67,8 @@ int main(void)
 		{
 			if (execve(argv[0], argv, environ) == -1)
 			{
-				perror("./prompt");
-				free(line);
-				free_array(argv);
-				free_array(path);
-				exit(EXIT_FAILURE);
+				fprintf(stderr, "%s: command not found\n", argv[0]);
+				exit(127);
 			}
 		}
 		else
