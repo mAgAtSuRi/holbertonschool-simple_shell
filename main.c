@@ -36,7 +36,16 @@ int main(void)
 			continue;
 		}
 
-		if (access(argv[0], X_OK) != 0)
+		if (strchr(argv[0], '/'))
+		{
+			if (access(argv[0], X_OK) != 0)
+			{
+				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+				free_array(argv);
+				continue;
+			}
+		}
+		else
 		{
 			if (check_builtin(argv[0], argv) == 1)
 			{
@@ -47,9 +56,9 @@ int main(void)
 			temp_cmd = check_path(path, argv[0]);
 			if (temp_cmd == NULL)
 			{
-                fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
-                free_array(argv);
-                continue;
+            	fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+        		free_array(argv);
+            	continue;
 			}
 			free(argv[0]);
 			argv[0] = temp_cmd;
