@@ -58,7 +58,7 @@ int main(void)
 			{
             	fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
         		free_array(argv);
-            	continue;
+            	exit(127);
 			}
 			free(argv[0]);
 			argv[0] = temp_cmd;
