@@ -44,6 +44,7 @@ int main(void)
 				continue;
 			}
 
+			path = get_paths(environ);
 			temp_cmd = check_path(path, argv[0]);
 			if (temp_cmd == NULL)
 			{
