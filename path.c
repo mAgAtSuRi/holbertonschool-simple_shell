@@ -55,7 +55,7 @@ char **get_paths(char **environ)
 {
 	int i = 0;
 	char **path;
-	char *temp_path;
+	char *temp_path = NULL;
 	char *temp_path2;
 
 	if (environ == NULL)
@@ -67,16 +67,10 @@ char **get_paths(char **environ)
 			temp_path = environ[i];
 		i++;
 	}
+	if (temp_path == NULL)
+		return (NULL);
 	temp_path2 = &temp_path[5];
 	path = split_string(temp_path2, ":");
 
-	/**
-	* print le path
-	* while (path[j] != NULL)
-	* {
-	* printf("%s\n", path[j]);
-	* j++;
-	* }
-	*/
 	return (path);
 }
