@@ -15,7 +15,6 @@ int main(void)
 	pid_t fpid;
 	int status;
 
-	path = get_paths(environ);
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
