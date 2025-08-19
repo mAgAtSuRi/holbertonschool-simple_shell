@@ -19,15 +19,16 @@
 typedef struct built_in
 {
 	char *cmd;
-	void (*f)(char **);
+	void (*f)(char **, char*, char **);
 } builtin_t;
 
 char **split_string(char *str, const char *sep);
 char **get_paths(char **environ);
 char *check_path(char **path, char *exec_name);
-int check_builtin(char *command, char **argv);
+int check_builtin(char *command, char **argv, char *line, char **path);
 int _atoi(char *str);
-void frexit(char **argv);
+void frexit(char **argv, char *line, char **path);
+void _printenv(char **argv, char *line, char **path);
 void free_array(char **array);
 void clean_all (char *, char **, char **);
 
