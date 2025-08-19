@@ -22,5 +22,6 @@ char *check_path(char **path, char *exec_name);
 int check_builtin(char *command, char **argv);
 int _atoi(char *str);
 void frexit(char **argv);
+void free_array(char **array);
 
 #endif

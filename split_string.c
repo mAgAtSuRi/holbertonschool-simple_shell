@@ -3,7 +3,7 @@
 /**
  * split_string - create an array filled with pointers to each word
  * @str: string to split
- *
+ * @sep: separator to split the string
  * Return: An array like argv
  */
 char **split_string(char *str, const char *sep)/*le proto a-t-il besoin d'un pointeur ? 
@@ -38,7 +38,7 @@ char **split_string(char *str, const char *sep)/*le proto a-t-il besoin d'un poi
 	token = strtok(str, sep);
 	while (token != NULL)
 	{
-		arg[j] = token;
+		arg[j] = strdup(token);
 		j++;
 		token = strtok(NULL, sep);
 	}
