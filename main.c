@@ -57,7 +57,7 @@ int main(void)
 			if (temp_cmd == NULL)
 			{
             	fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
-        		free_array(argv);
+        		clean_all(line, argv, path);
             	exit(127);
 			}
 			free(argv[0]);
@@ -68,9 +68,7 @@ int main(void)
 		if (fpid == -1)
 		{
 			perror("fpid");
-			free(line);
-			free_array(argv);
-			free_array(path);
+			clean_all(line, argv, path);
 			exit(EXIT_FAILURE);
 		}
 		else if (fpid == 0)

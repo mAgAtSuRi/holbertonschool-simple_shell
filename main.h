@@ -29,5 +29,6 @@ int check_builtin(char *command, char **argv);
 int _atoi(char *str);
 void frexit(char **argv);
 void free_array(char **array);
+void clean_all (char *, char **, char **);
 
 #endif
