@@ -23,10 +23,10 @@ int main(void)
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
 			break;
-		if (nread == 1)/*cas où c'est un espace ; ignorer ?*/
+		if (nread == 1)
 			continue;
 		if ((nread > 0) && (line[nread - 1] == '\n'))
-			line[nread - 1] = '\0'; /*raison pour laquelle ça foire avec echo ?*/
+			line[nread - 1] = '\0';
 
 		argv = split_string(line, " ");
 		if (argv[0] == NULL)

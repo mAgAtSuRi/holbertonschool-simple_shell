@@ -6,8 +6,7 @@
  * @sep: separator to split the string
  * Return: An array like argv
  */
-char **split_string(char *str, const char *sep)/*le proto a-t-il besoin d'un pointeur ? 
-												pour le sep ?*/
+char **split_string(char *str, const char *sep)
 {
 	int i = 0, j = 0, word_num = 1;
 	char *token;
