@@ -15,6 +15,7 @@ int main(void)
 	pid_t fpid;
 	int status;
 
+	path = get_paths(environ);
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
@@ -43,7 +44,6 @@ int main(void)
 				continue;
 			}
 
-			path = get_paths(environ);
 			temp_cmd = check_path(path, argv[0]);
 			if (temp_cmd == NULL)
 			{
