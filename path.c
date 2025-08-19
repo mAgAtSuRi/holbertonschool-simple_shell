@@ -14,6 +14,9 @@ char *check_path(char **path, char *exec_name)
 	struct dirent *file;
 	char *buffer;
 
+	if (path == NULL)
+		return (NULL);
+
 	buffer = malloc(sizeof(char) * PATH_MAX);
 	if (buffer == NULL)
 		return (NULL);
@@ -70,6 +73,8 @@ char **get_paths(char **environ)
 	if (temp_path == NULL)
 		return (NULL);
 	temp_path2 = &temp_path[5];
+	if (temp_path2[0] == '\0')
+		return (NULL);
 	path = split_string(temp_path2, ":");
 
 	return (path);
