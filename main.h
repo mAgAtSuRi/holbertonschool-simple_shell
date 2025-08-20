@@ -9,6 +9,9 @@
 #include <string.h>
 #include <dirent.h>
 #include <linux/limits.h>
+
+extern char **environ;
+
 /**
  * struct built_in - Structure of a shell command
  * @cmd: builtin command
@@ -19,17 +22,19 @@
 typedef struct built_in
 {
 	char *cmd;
-	void (*f)(char **, char*, char **, int);
+	void (*f)(char **, char **, int);
 } builtin_t;
 
 char **split_string(char *str, const char *sep);
 char **get_paths(char **environ);
 char *check_path(char **path, char *exec_name);
-int check_builtin(char *command, char **argv, char *line, char **path, int status);
+int check_builtin(char *command, char **argv, char **path, int status);
 int _atoi(char *str);
-void frexit(char **argv, char *line, char **path, int status);
-void _printenv(char **argv, char *line, char **path, int status);
+void frexit(char **argv, char **path, int status);
+void _printenv(char **argv, char **path, int status);
 void free_array(char **array);
-void clean_all (char *, char **, char **);
+void clean_all(char **, char **);
+int get_line(char ***argv);
+void go_process(char **argv, char **path, int *status);
 
 #endif

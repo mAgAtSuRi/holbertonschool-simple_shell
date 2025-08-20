@@ -1,4 +1,16 @@
 #include "main.h"
+/**
+ * clean_all - free everything
+ * @line: line to free
+ * @argv: argv to free
+ * @path: path to free
+ */
+void clean_all(char **argv, char **path)
+{
+	free_array(argv);
+	free_array(path);
+}
+
 
 /**
  * free_array - frees a 2d array
