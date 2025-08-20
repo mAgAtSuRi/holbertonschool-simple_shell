@@ -72,10 +72,10 @@ char **get_paths(char **environ)
 	}
 	if (temp_path == NULL)
 		return (NULL);
-	temp_path2 = &temp_path[5];
+	temp_path2 = strdup(&temp_path[5]);/*copier*/
 	if (temp_path2[0] == '\0')
 		return (NULL);
 	path = split_string(temp_path2, ":");
-
+	free(temp_path2);
 	return (path);
 }
