@@ -1,7 +1,6 @@
 #include "main.h"
 /**
  * clean_all - free everything
- * @line: line to free
  * @argv: argv to free
  * @path: path to free
  */
