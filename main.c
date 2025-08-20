@@ -23,36 +23,27 @@ int main(void)
 			break;
 		if (res_line == 0)
 			continue;
-
 		if (strchr(argv[0], '/'))
 		{
 			if (access(argv[0], X_OK) != 0)
 			{
 				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
 				free_array(argv);
-				continue;
-			}
-		}
+				continue; } }
 		else
 		{
 			if (check_builtin(argv[0], argv, path, status) == 1)
-			{
-				free_array(argv);
-				continue;
-			}
+			{free_array(argv);
+				continue; }
 
 			temp_cmd = check_path(path, argv[0]);
 			if (temp_cmd == NULL)
 			{
 				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
 				clean_all(argv, path);
-				exit(127);
-			}
+				exit(127); }
 			free(argv[0]);
-			argv[0] = temp_cmd;
-		}
-		go_process(argv, path, &status);
-	}
+			argv[0] = temp_cmd; }
+		go_process(argv, path, &status); }
 	free_array(path);
-	return (0);
-}
+	return (0); }
