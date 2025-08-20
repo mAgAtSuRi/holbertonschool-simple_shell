@@ -13,7 +13,7 @@ int main(void)
 	extern char **environ;
 	char **argv, **path;
 	pid_t fpid;
-	int status;
+	int status = 0;
 
 	path = get_paths(environ);
 	while (1)
