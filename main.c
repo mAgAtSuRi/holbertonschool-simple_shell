@@ -47,7 +47,7 @@ int main(void)
 		}
 		else
 		{
-			if (check_builtin(argv[0], argv, line, path) == 1)
+			if (check_builtin(argv[0], argv, line, path, status) == 1)
 			{
 				free_array(argv);
 				continue;
