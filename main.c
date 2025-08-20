@@ -7,13 +7,11 @@
  */
 int main(void)
 {
-	char *line = NULL, *temp_cmd;
-	size_t len = 0;
-	int nread = 0;
-	extern char **environ;
-	char **argv, **path;
+	char *temp_cmd;
+	char **argv = NULL, **path = NULL;
 	pid_t fpid;
 	int status = 0;
+	int res_line;
 
 	path = get_paths(environ);
 	while (1)
@@ -21,7 +19,12 @@ int main(void)
 		if (isatty(STDIN_FILENO) == 1)
 			printf("prompt$ ");
 
-		nread = getline(&line, &len, stdin);
+		res_line = get_line(&argv);
+		if (res_line == -1)
+			break;
+		if (res_line == 0)
+			continue;
+		/*nread = getline(&line, &len, stdin);
 		if (nread == -1)
 			break;
 		if (nread == 1)
@@ -34,7 +37,7 @@ int main(void)
 		{
 			free_array(argv);
 			continue;
-		}
+		}*/
 
 		if (strchr(argv[0], '/'))
 		{
@@ -47,7 +50,7 @@ int main(void)
 		}
 		else
 		{
-			if (check_builtin(argv[0], argv, line, path, status) == 1)
+			if (check_builtin(argv[0], argv, path, status) == 1)
 			{
 				free_array(argv);
 				continue;
@@ -57,7 +60,7 @@ int main(void)
 			if (temp_cmd == NULL)
 			{
             	fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
-        		clean_all(line, argv, path);
+        		clean_all(argv, path);
             	exit(127);
 			}
 			free(argv[0]);
@@ -68,7 +71,7 @@ int main(void)
 		if (fpid == -1)
 		{
 			perror("fpid");
-			clean_all(line, argv, path);
+			clean_all(argv, path);
 			exit(EXIT_FAILURE);
 		}
 		else if (fpid == 0)
@@ -87,7 +90,6 @@ int main(void)
             free_array(argv);
         }
 	}
-	free(line);
 	free_array(path);
 	return (0);
 }
