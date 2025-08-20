@@ -1,0 +1,54 @@
+.TH HSH 1 "August 2025" "v1.0" "HSH Manual"
+.SH NAME
+HSH (Holberton Shell) \- a basic Unix shell implemented in C
+
+.SH SYNOPSIS
+.B HSH
+[\fIcommand\fR ...]
+
+.SH DESCRIPTION
+.B HSH
+is a minimal Unix-like shell that reads user input, handles built-in functions, and executes programs found in the PATH.
+
+It supports the following built-in commands:
+
+.TP
+.B exit
+Exit the shell. Usage: \fBexit [status]\fR. If a status code is provided, the shell exits with that code; otherwise it exits with the last command status.
+
+.TP
+.B env
+Print the current environment variables.
+
+.SH FEATURES
+.IP
+* Handles execution of external commands via fork and execve.
+.IP
+* Resolves executable paths using the PATH environment variable.
+.IP
+* Frees memory allocated for command arguments and PATH array after each command.
+.IP
+* Supports basic input parsing using whitespace as a separator.
+
+.SH USAGE
+Run \fBhsh\fR with no arguments to start an interactive shell:
+
+.EX
+$ ./hsh
+prompt$ ls -l
+...
+prompt$ exit
+.EE
+
+.SH FILES
+.TP
+.B main.h
+Header file containing function prototypes and struct definitions.
+
+.TP
+.B man_hsh
+This manual page.
+
+.SH AUTHOR
+Mathieu Majerus
+Tristan Martinez
