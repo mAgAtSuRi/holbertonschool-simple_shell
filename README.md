@@ -39,6 +39,7 @@ Here is a brief description of each files needed :
 |`atoi.c`		| since using the standard atoi was not allowed, we implemented our own version.
 |`main.h`	| is our header file, needed to the compiler.  
 |`man`	| contains the man page of the program
+|`AUTHORS` | contains names and emails of authors
 
 **Authorized functions :**  
 
@@ -136,7 +137,7 @@ This flowchat explains how the shell works.
 ## 📗 Man page :
 
 If you need help, you can access the man page using this command :
-> man man
+> man man_hsh
 
 ## 💼 Authors :
 **Mathieu Majérus** - https://github.com/MathieuMjr  
