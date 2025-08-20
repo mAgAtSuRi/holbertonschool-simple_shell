@@ -35,5 +35,6 @@ void _printenv(char **argv, char **path, int status);
 void free_array(char **array);
 void clean_all(char **, char **);
 int get_line(char ***argv);
+void go_process(char **argv, char **path, int *status);
 
 #endif
