@@ -1,4 +1,4 @@
-# Holberton School - Simple Shell
+# HSH - Holbertonschool Simple shell
 
 This project was about programming a simple shell.  
 Once executed, this program prints a prompt and wait for the user to type commands.  
@@ -38,6 +38,7 @@ Here is a brief description of each files needed :
 |`split_string.c`| is a function that use `strtok` function to deal with arguments of the command, but also used in getpath.
 |`atoi.c`		| since using the standard atoi was not allowed, we implemented our own version.
 |`main.h`	| is our header file, needed to the compiler.  
+|`man`	| contains the man page of the program
 
 **Authorized functions :**  
 
@@ -103,12 +104,13 @@ Here is a recap of all created functions returns :
 |get_paths | Store paths stored in PATH variable | Pointer to an array of strings or NULL if malloc fails or if PATH is an empty string| EXIT_FAILURE if environ is NULL
 |check_path | Look into PATH directories for an executable file matching the user's command | Pointer to the path of the executable file, or NULL if Malloc fails, PATH is NULL or no match found | /
 | split_string | Cut a string using a specific separator and stores the results in a NULL terminated array | Pointer to the array containing the sub-strings or NULL if the string given is NULL or Malloc fails | / 
+|get_line | store line typed by user from stdin, and args in an array | 1 if succeed, -1 if getline fails, 0 if split_string fails or command is an empty string | /
+| go_process | create a subprocess and use execve to execute the command's binary file | Void | EXIT_FAILURE if subprocess fails to be created, exit(127) if execve fails |
+main | run the sell ; instructions to check if user send à pathname or a command, instructions to check is command is a build in and instructions to find binary file in PATH directories are here | 0 if program succeed | exit
 
 ### Exit code from main
 
-If execve fails or if no match is found between PATH and user's command, the program exit with a status code = 127.
-
-If fork fails, the program exit with status code = EXIT_FAILURE.
+If no match is found between PATH and user's command, the program exit with a status code = 127.
 
 ### Error messages
 
@@ -132,6 +134,9 @@ This flowchat explains how the shell works.
 
 
 ## 📗 Man page :
+
+If you need help, you can access the man page using this command :
+> man man
 
 ## 💼 Authors :
 **Mathieu Majérus** - https://github.com/MathieuMjr  
