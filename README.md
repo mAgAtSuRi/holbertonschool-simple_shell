@@ -131,7 +131,7 @@ Case 3 - The command exists but the executable file can't be reached. Here are s
 ## 🔎 Flowchart :  
 This flowchat explains how the shell works. 
 
-<img src = https://github.com/mAgAtSuRi/holbertonschool-simple_shell/blob/main/Flowchart_simple_shell.jpg?raw=true>
+(Flowchart_simple_shell.jpg)
 
 
 ## 📗 Man page :
